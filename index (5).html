@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LifeHub™ — One app for your whole family. Schedules, bills, meals, and money. All in one place. Made easy.">
+<meta name="robots" content="noindex, noarchive">
+<meta name="copyright" content="© 2026 LifeHub™. Patent Pending. All rights reserved.">
+<meta property="og:title" content="LifeHub™ — Family Command Center">
+<meta property="og:description" content="One app for your whole family — schedules, bills, meals, and money. All in one place. Made easy.">
+<title>LifeHub™ — Family Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sand: #f5efe6;
+  --sand2: #ede4d6;
+  --ocean: #2c7da0;
+  --ocean-deep: #1a4f6e;
+  --ocean-light: #a8d5e8;
+  --ocean-pale: #e0f0f8;
+  --coral: #e07a5f;
+  --coral-light: #f5c4b8;
+  --seafoam: #84c7af;
+  --seafoam-light: #c5e8db;
+  --sun: #f4a261;
+  --sun-light: #fde8d0;
+  --white: #ffffff;
+  --text: #1a2e3b;
+  --text-mid: #4a6274;
+  --text-light: #8ba5b5;
+  --border: rgba(44,125,160,0.15);
+  --shadow: 0 4px 24px rgba(26,79,110,0.10);
+  --shadow-lg: 0 12px 48px rgba(26,79,110,0.15);
+  --radius: 18px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── LANDING PAGE ─────────────────────────────────────── */
+#landing {
+  display: block;
+  background: var(--white);
+}
+#app-shell { display: none; }
+
+/* Nav */
+.land-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.land-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--ocean-deep);
+}
+.land-logo span { color: var(--coral); }
+.land-nav-links { display: flex; gap: 32px; align-items: center; }
+.land-nav-links a {
+  text-decoration: none; color: var(--text-mid);
+  font-size: 0.9rem; font-weight: 500;
+  transition: color 0.2s;
+}
+.land-nav-links a:hover { color: var(--ocean); }
+.nav-cta {
+  background: var(--ocean); color: white !important;
+  padding: 10px 22px; border-radius: 50px;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--ocean-deep) !important; }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 100px 40px 60px;
+  background: linear-gradient(160deg, #fff8f2 0%, #e8f5fb 50%, #fff0ea 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; bottom: -80px; left: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(168,213,232,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute; top: 60px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(224,122,95,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-inner {
+  max-width: 1200px; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ocean-pale); color: var(--ocean-deep);
+  padding: 6px 16px; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600;
+  margin-bottom: 20px;
+}
+.hero-badge::before { content: '🌊'; }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--text); margin-bottom: 20px;
+}
+.hero-title .accent { color: var(--ocean); }
+.hero-title .accent2 { color: var(--coral); }
+.hero-sub {
+  font-size: 1.1rem; color: var(--text-mid);
+  line-height: 1.7; margin-bottom: 36px;
+  max-width: 480px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ocean); color: white;
+  padding: 15px 32px; border-radius: 50px;
+  font-weight: 600; font-size: 1rem;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 24px rgba(44,125,160,0.35);
+}
+.btn-primary:hover { background: var(--ocean-deep); transform: translateY(-2px); }
+.btn-secondary {
+  background: white; color: var(--ocean);
+  padding: 15px 32px; border-radius: 50px;
+  font-weight: 600; font-size: 1rem;
+  text-decoration: none; cursor: pointer;
+  border: 2px solid var(--ocean-light);
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { border-color: var(--ocean); background: var(--ocean-pale); }
+.hero-trust {
+  display: flex; gap: 24px; margin-top: 28px; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.85rem; color: var(--text-mid);
+}
+.trust-item strong { color: var(--ocean-deep); }
+
+/* Hero mockup */
+.hero-visual { position: relative; }
+.phone-frame {
+  background: white;
+  border-radius: 36px;
+  padding: 18px 14px;
+  box-shadow: 0 30px 80px rgba(26,79,110,0.20), 0 0 0 2px rgba(44,125,160,0.1);
+  max-width: 300px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.phone-screen {
+  background: var(--sand);
+  border-radius: 24px;
+  overflow: hidden;
+  height: 540px;
+}
+.phone-header {
+  background: var(--ocean-deep);
+  padding: 14px 16px;
+  color: white;
+}
+.phone-header-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.phone-logo-sm {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800; font-size: 1rem;
+}
+.phone-greeting { font-size: 0.7rem; opacity: 0.75; }
+.phone-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.phone-stat {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 8px;
+  text-align: center;
+}
+.phone-stat-val { font-size: 0.85rem; font-weight: 700; }
+.phone-stat-label { font-size: 0.58rem; opacity: 0.7; }
+.phone-tabs {
+  display: flex; overflow-x: auto;
+  background: white; padding: 8px 10px;
+  gap: 6px; border-bottom: 1px solid var(--border);
+}
+.phone-tab {
+  flex-shrink: 0; padding: 5px 10px;
+  border-radius: 20px; font-size: 0.62rem; font-weight: 600;
+  background: var(--sand); color: var(--text-mid);
+}
+.phone-tab.active { background: var(--ocean); color: white; }
+.phone-content { padding: 12px; overflow-y: auto; height: calc(100% - 130px); }
+.phone-card {
+  background: white; border-radius: 12px;
+  padding: 10px 12px; margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.phone-card-title { font-size: 0.65rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.phone-item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.6rem; color: var(--text-mid);
+}
+.phone-item:last-child { border: none; }
+.phone-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.phone-pill {
+  background: var(--seafoam-light); color: var(--ocean-deep);
+  padding: 1px 6px; border-radius: 10px; font-size: 0.55rem; font-weight: 600;
+  margin-left: auto;
+}
+.floating-card {
+  position: absolute; background: white;
+  border-radius: 16px; padding: 12px 16px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.8rem;
+}
+.fc-left {
+  left: -60px; top: 120px;
+  border-left: 3px solid var(--coral);
+}
+.fc-right {
+  right: -55px; bottom: 140px;
+  border-left: 3px solid var(--seafoam);
+}
+.fc-label { font-size: 0.65rem; color: var(--text-light); margin-bottom: 2px; }
+.fc-value { font-weight: 700; color: var(--text); }
+
+/* Ticker */
+.ticker-wrap {
+  background: var(--ocean-deep); color: white;
+  padding: 13px 0; overflow: hidden;
+}
+.ticker-track {
+  display: flex; gap: 40px;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; font-weight: 500; flex-shrink: 0;
+}
+.ticker-item::before { content: attr(data-icon); font-size: 1rem; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Section styles */
+.section {
+  padding: 90px 40px;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-tag {
+  display: inline-block;
+  background: var(--ocean-pale); color: var(--ocean);
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 700;
+  margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800; margin-bottom: 14px;
+  color: var(--text);
+}
+.section-sub {
+  font-size: 1.05rem; color: var(--text-mid); line-height: 1.7;
+  max-width: 560px;
+}
+
+/* Features */
+.features-bg { background: var(--sand); }
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 50px;
+}
+.feat-card {
+  background: white; border-radius: var(--radius);
+  padding: 28px; transition: all 0.3s;
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.feat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--ocean), var(--seafoam));
+}
+.feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.feat-icon {
+  width: 50px; height: 50px;
+  background: var(--ocean-pale); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 16px;
+}
+.feat-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+.feat-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+
+/* Demo */
+.demo-section {
+  background: linear-gradient(160deg, var(--ocean-deep) 0%, #1a4f6e 100%);
+  padding: 90px 40px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.demo-section::before {
+  content: '';
+  position: absolute; top: -150px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(168,213,232,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.demo-section .section-title { color: white; }
+.demo-section .section-sub { color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto 40px; }
+.demo-section .section-tag { background: rgba(255,255,255,0.15); color: white; }
+.demo-window {
+  max-width: 760px; margin: 0 auto;
+  background: var(--sand); border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+}
+.demo-toolbar {
+  background: white; padding: 12px 18px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.demo-url {
+  flex: 1; background: var(--sand); border-radius: 6px;
+  padding: 5px 12px; font-size: 0.75rem; color: var(--text-mid);
+}
+.demo-screens { position: relative; height: 380px; overflow: hidden; }
+.demo-screen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  opacity: 0; transition: opacity 0.6s;
+  padding: 24px;
+}
+.demo-screen.active { opacity: 1; }
+.demo-screen-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 800; color: var(--ocean-deep);
+  margin-bottom: 14px;
+}
+.demo-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.demo-card {
+  background: white; border-radius: 12px; padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.demo-card-label { font-size: 0.7rem; color: var(--text-light); margin-bottom: 4px; }
+.demo-card-value { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.demo-card-sub { font-size: 0.68rem; color: var(--seafoam); font-weight: 600; }
+.demo-dots {
+  display: flex; justify-content: center; gap: 8px;
+  padding: 16px;
+}
+.demo-dot-nav {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(44,125,160,0.25); cursor: pointer;
+  transition: all 0.3s;
+}
+.demo-dot-nav.active { background: var(--ocean); width: 20px; border-radius: 4px; }
+.demo-note {
+  font-size: 0.82rem; color: rgba(255,255,255,0.6);
+  margin-top: 20px;
+}
+
+/* Social Proof */
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 50px;
+}
+.review-card {
+  background: var(--sand); border-radius: var(--radius);
+  padding: 28px; border: 1px solid var(--border);
+}
+.stars { color: var(--sun); font-size: 1rem; margin-bottom: 14px; }
+.review-text { font-size: 0.93rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; color: white;
+}
+.review-name { font-weight: 700; font-size: 0.9rem; }
+.review-role { font-size: 0.78rem; color: var(--text-light); }
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 50px;
+  background: var(--ocean-deep); border-radius: var(--radius);
+  padding: 36px;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; font-weight: 800; color: white;
+  display: block;
+}
+.stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+/* Pricing */
+.pricing-bg { background: var(--sand); }
+.pricing-toggle {
+  display: flex; align-items: center; gap: 14px;
+  justify-content: center; margin: 30px 0;
+}
+.toggle-label { font-size: 0.9rem; color: var(--text-mid); font-weight: 500; }
+.toggle-switch {
+  width: 48px; height: 26px; background: var(--ocean);
+  border-radius: 50px; cursor: pointer; position: relative;
+  transition: background 0.3s; border: none; outline: none;
+}
+.toggle-switch::after {
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px; border-radius: 50%; background: white;
+  transition: transform 0.3s;
+}
+.toggle-switch.annual::after { transform: translateX(22px); }
+.save-badge {
+  background: var(--coral); color: white;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 700;
+}
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-top: 20px; align-items: start;
+}
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.plan-card {
+  background: white; border-radius: var(--radius);
+  padding: 32px 28px; border: 2px solid var(--border);
+  transition: all 0.3s; position: relative;
+}
+.plan-card.featured {
+  border-color: var(--ocean);
+  transform: scale(1.04);
+  box-shadow: var(--shadow-lg);
+}
+.plan-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--ocean); color: white;
+  padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+}
+.plan-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;
+}
+.plan-tagline { font-size: 0.83rem; color: var(--text-light); margin-bottom: 20px; }
+.plan-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem; font-weight: 800; color: var(--ocean-deep);
+}
+.plan-price span { font-size: 1rem; font-weight: 400; color: var(--text-light); }
+.plan-period { font-size: 0.8rem; color: var(--text-light); margin-bottom: 24px; }
+.plan-features { list-style: none; margin-bottom: 28px; }
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.88rem; color: var(--text-mid);
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+}
+.plan-features li:last-child { border: none; }
+.plan-features li::before { content: '✓'; color: var(--seafoam); font-weight: 700; flex-shrink: 0; }
+.plan-btn {
+  width: 100%; padding: 14px;
+  border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; border: none; transition: all 0.2s;
+}
+.plan-btn-primary { background: var(--ocean); color: white; }
+.plan-btn-primary:hover { background: var(--ocean-deep); }
+.plan-btn-outline { background: transparent; color: var(--ocean); border: 2px solid var(--ocean-light); }
+.plan-btn-outline:hover { background: var(--ocean-pale); }
+
+/* FAQ */
+.faq-list { max-width: 720px; margin: 50px auto 0; }
+.faq-item {
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 0; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 600; color: var(--text);
+  text-align: left;
+}
+.faq-arrow { font-size: 1.2rem; color: var(--ocean); transition: transform 0.3s; }
+.faq-q.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  font-size: 0.92rem; color: var(--text-mid); line-height: 1.7;
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+}
+.faq-a.open { max-height: 200px; padding-bottom: 18px; }
+
+/* Waitlist / CTA */
+.cta-section {
+  background: linear-gradient(135deg, var(--sand) 0%, var(--ocean-pale) 100%);
+  padding: 90px 40px; text-align: center;
+}
+.waitlist-form {
+  display: flex; gap: 12px; max-width: 480px; margin: 32px auto 0;
+  flex-wrap: wrap; justify-content: center;
+}
+.waitlist-input {
+  flex: 1; min-width: 220px;
+  padding: 14px 20px; border-radius: 50px;
+  border: 2px solid var(--border); font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  outline: none; transition: border 0.2s;
+  background: white;
+}
+.waitlist-input:focus { border-color: var(--ocean); }
+.waitlist-note { font-size: 0.8rem; color: var(--text-light); margin-top: 12px; }
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: var(--ocean-deep); color: white;
+  padding: 14px 28px; border-radius: 50px;
+  font-weight: 600; font-size: 0.9rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s; z-index: 9999;
+}
+.toast.show { opacity: 1; }
+
+/* Land Footer */
+.land-footer {
+  background: var(--ocean-deep); color: rgba(255,255,255,0.65);
+  padding: 40px; text-align: center;
+  font-size: 0.82rem;
+}
+.land-footer strong { color: white; }
+.land-footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 12px; }
+.land-footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+/* ─── APP SHELL ─────────────────────────────────────────── */
+#app-shell {
+  display: none;
+  background: var(--sand);
+  min-height: 100vh;
+}
+
+/* PIN Screen */
+#pin-screen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(160deg, #e8f5fb 0%, var(--sand) 100%);
+}
+.pin-box {
+  background: white; border-radius: 28px; padding: 48px 40px;
+  text-align: center; box-shadow: var(--shadow-lg);
+  width: 360px;
+}
+.pin-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 800; color: var(--ocean-deep);
+  margin-bottom: 6px;
+}
+.pin-logo span { color: var(--coral); }
+.pin-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 30px; }
+.pin-select {
+  width: 100%; padding: 12px 16px;
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  margin-bottom: 16px; outline: none;
+  transition: border 0.2s; background: var(--sand); color: var(--text);
+}
+.pin-select:focus { border-color: var(--ocean); }
+.pin-dots { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+.pin-dot-ui {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--ocean-light); transition: all 0.2s;
+}
+.pin-dot-ui.filled { background: var(--ocean); border-color: var(--ocean); }
+.pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pin-key {
+  background: var(--sand); border: none;
+  border-radius: 14px; padding: 18px;
+  font-size: 1.2rem; font-weight: 600; color: var(--text);
+  cursor: pointer; transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.pin-key:hover { background: var(--ocean-pale); }
+.pin-key:active { transform: scale(0.95); background: var(--ocean-light); }
+.pin-key.clear { font-size: 0.8rem; color: var(--text-light); }
+.pin-error { color: var(--coral); font-size: 0.83rem; min-height: 20px; margin-top: 10px; }
+.pin-shake { animation: shake 0.4s; }
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-6px)}
+  40%,80%{transform:translateX(6px)}
+}
+
+/* App Layout */
+#main-app {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-header {
+  background: var(--ocean-deep); color: white;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.app-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 800;
+}
+.app-logo .sp { color: var(--coral-light); }
+.app-header-right { display: flex; align-items: center; gap: 14px; }
+.app-user {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem;
+}
+.app-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+}
+.btn-logout {
+  background: rgba(255,255,255,0.15); border: none;
+  color: white; padding: 6px 14px; border-radius: 20px;
+  font-size: 0.78rem; cursor: pointer; transition: background 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.25); }
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; border-top: 1px solid var(--border);
+  display: flex; z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+.nav-tab {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; padding: 10px 4px;
+  cursor: pointer; transition: all 0.2s;
+  border: none; background: none; color: var(--text-light);
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-tab.active { color: var(--ocean); }
+.nav-tab-icon { font-size: 1.3rem; margin-bottom: 3px; }
+.nav-tab-label { font-size: 0.6rem; font-weight: 600; }
+.nav-tab.active .nav-tab-icon { transform: translateY(-2px); }
+
+.app-content {
+  flex: 1; padding: 20px 20px 90px;
+  max-width: 900px; margin: 0 auto; width: 100%;
+}
+
+/* Panels */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* Shared UI */
+.card {
+  background: white; border-radius: var(--radius);
+  padding: 20px; margin-bottom: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.card-title {
+  font-weight: 700; font-size: 0.92rem; color: var(--text);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 600;
+}
+.chip-blue { background: var(--ocean-pale); color: var(--ocean-deep); }
+.chip-green { background: var(--seafoam-light); color: #1a6649; }
+.chip-coral { background: var(--coral-light); color: #8b2a15; }
+.chip-sun { background: var(--sun-light); color: #7a4200; }
+.input-row {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;
+}
+.app-input {
+  flex: 1; min-width: 120px;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  border: 2px solid var(--border); font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem; outline: none; transition: border 0.2s;
+  background: var(--sand);
+}
+.app-input:focus { border-color: var(--ocean); background: white; }
+.app-btn {
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 0.88rem; transition: all 0.2s;
+}
+.app-btn-primary { background: var(--ocean); color: white; }
+.app-btn-primary:hover { background: var(--ocean-deep); }
+.progress-bar-wrap {
+  background: var(--sand); border-radius: 20px; height: 8px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 20px;
+  background: linear-gradient(90deg, var(--seafoam), var(--ocean));
+  transition: width 0.5s;
+}
+
+/* Overview */
+.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.ov-stat {
+  background: white; border-radius: var(--radius);
+  padding: 18px; border: 1px solid var(--border);
+  text-align: center;
+}
+.ov-stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 800; }
+.ov-stat-label { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
+
+/* Tasks */
+.task-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--border);
+}
+.task-item:last-child { border: none; }
+.task-cb {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--ocean-light); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s; background: white;
+}
+.task-cb.done { background: var(--ocean); border-color: var(--ocean); color: white; font-size: 0.7rem; }
+.task-text { flex: 1; font-size: 0.9rem; color: var(--text); }
+.task-text.done { text-decoration: line-through; color: var(--text-light); }
+.task-assign { font-size: 0.72rem; color: var(--text-light); }
+
+/* Finance */
+.account-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.account-row:last-child { border: none; }
+.account-name { color: var(--text-mid); }
+.account-bal { font-weight: 700; color: var(--text); }
+.account-bal.positive { color: #1a7a4a; }
+.account-bal.negative { color: var(--coral); }
+.budget-row {
+  margin-bottom: 12px;
+}
+.budget-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.82rem; margin-bottom: 5px;
+  color: var(--text-mid);
+}
+.budget-label span { font-weight: 700; color: var(--text); }
+
+/* Calendar */
+.cal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.cal-month {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--text);
+}
+.cal-nav { background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--ocean); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-day-label { text-align: center; font-size: 0.68rem; font-weight: 700; color: var(--text-light); padding: 6px; }
+.cal-day {
+  text-align: center; padding: 8px 4px; border-radius: 8px;
+  font-size: 0.8rem; cursor: pointer; transition: all 0.2s; position: relative;
+}
+.cal-day:hover { background: var(--ocean-pale); }
+.cal-day.today { background: var(--ocean); color: white; font-weight: 700; }
+.cal-day.has-event::after {
+  content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: var(--coral);
+}
+.cal-day.today.has-event::after { background: white; }
+
+/* Meals */
+.meal-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.meal-row:last-child { border: none; }
+.meal-icon { font-size: 1.4rem; }
+.meal-info { flex: 1; }
+.meal-name { font-weight: 600; font-size: 0.9rem; }
+.meal-cal { font-size: 0.75rem; color: var(--text-light); }
+
+/* Family Hub */
+.member-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px; background: var(--sand); border-radius: 12px;
+  margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.member-card.selected { border-color: var(--ocean); background: var(--ocean-pale); }
+.member-avatar-lg {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700; color: white; flex-shrink: 0;
+}
+.member-name { font-weight: 700; font-size: 0.95rem; }
+.member-role { font-size: 0.75rem; color: var(--text-light); }
+.perm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.perm-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  background: white; border-radius: 10px; padding: 10px 12px;
+  font-size: 0.82rem; color: var(--text-mid);
+}
+.perm-switch {
+  width: 34px; height: 18px; border-radius: 20px; border: none;
+  cursor: pointer; position: relative; transition: background 0.3s;
+}
+.perm-switch::after {
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px; border-radius: 50%; background: white;
+  transition: transform 0.3s;
+}
+.perm-switch.on { background: var(--ocean); }
+.perm-switch.on::after { transform: translateX(16px); }
+.perm-switch.off { background: var(--border); }
+
+/* Messages */
+.msg-list { max-height: 300px; overflow-y: auto; margin-bottom: 12px; }
+.msg-bubble {
+  margin-bottom: 10px; display: flex; flex-direction: column;
+}
+.msg-bubble.me { align-items: flex-end; }
+.msg-bubble.them { align-items: flex-start; }
+.msg-text {
+  padding: 10px 14px; border-radius: 16px;
+  font-size: 0.88rem; max-width: 75%;
+}
+.msg-bubble.me .msg-text { background: var(--ocean); color: white; border-bottom-right-radius: 4px; }
+.msg-bubble.them .msg-text { background: white; color: var(--text); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+.msg-meta { font-size: 0.65rem; color: var(--text-light); margin-top: 3px; }
+
+/* AI Assistant */
+.ai-chat { max-height: 340px; overflow-y: auto; margin-bottom: 14px; }
+.ai-msg {
+  padding: 12px 16px; border-radius: 14px;
+  margin-bottom: 10px; font-size: 0.88rem; line-height: 1.6;
+}
+.ai-msg.user { background: var(--ocean); color: white; margin-left: 40px; }
+.ai-msg.ai { background: white; color: var(--text); border: 1px solid var(--border); margin-right: 40px; }
+.ai-thinking { display: flex; gap: 4px; padding: 4px; }
+.ai-thinking span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--text-light);
+  animation: think 1.2s ease-in-out infinite;
+}
+.ai-thinking span:nth-child(2) { animation-delay: 0.2s; }
+.ai-thinking span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes think { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
+
+/* ─── PAYMENT MODAL ─────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(10,30,45,0.65); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.pay-modal {
+  background: white; border-radius: 28px;
+  width: 520px; max-width: 95vw; max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.35);
+  transform: translateY(30px); transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-overlay.open .pay-modal { transform: translateY(0); }
+.pay-header {
+  background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+  padding: 28px 32px 24px; border-radius: 28px 28px 0 0; color: white;
+}
+.pay-header-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.pay-plan-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; }
+.pay-plan-price { text-align: right; }
+.pay-price-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; }
+.pay-price-period { font-size: 0.78rem; opacity: 0.7; display: block; }
+.pay-plan-desc { font-size: 0.85rem; opacity: 0.8; margin-top: 6px; }
+.modal-close {
+  position: absolute; top: 18px; right: 22px;
+  background: rgba(255,255,255,0.15); border: none; color: white;
+  width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.3); }
+.pay-body { padding: 28px 32px 32px; }
+.pay-section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 14px;
+}
+.pay-toggle-row {
+  display: flex; background: var(--sand); border-radius: 12px;
+  padding: 4px; margin-bottom: 24px; gap: 4px;
+}
+.pay-toggle-btn {
+  flex: 1; padding: 10px; border-radius: 9px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; color: var(--text-mid); background: none;
+}
+.pay-toggle-btn.active { background: white; color: var(--ocean-deep); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.pay-save-tag {
+  display: inline-block; background: var(--coral-light); color: var(--coral);
+  font-size: 0.65rem; font-weight: 700; padding: 1px 7px; border-radius: 20px;
+  margin-left: 5px; vertical-align: middle;
+}
+.pay-features-list { list-style: none; margin-bottom: 24px; }
+.pay-features-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.88rem; color: var(--text-mid);
+}
+.pay-features-list li:last-child { border: none; }
+.pay-features-list li::before { content: '✓'; color: var(--seafoam); font-weight: 700; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-row.full { grid-template-columns: 1fr; }
+.pay-field {
+  display: flex; flex-direction: column; gap: 5px;
+}
+.pay-label { font-size: 0.75rem; font-weight: 600; color: var(--text-mid); }
+.pay-input {
+  padding: 12px 14px; border-radius: 10px;
+  border: 2px solid var(--border); font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem; outline: none; transition: border 0.2s;
+  background: var(--sand); color: var(--text);
+}
+.pay-input:focus { border-color: var(--ocean); background: white; }
+.card-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.pay-card-icons { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; }
+.card-icon {
+  background: var(--sand); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: 700;
+  color: var(--text-mid);
+}
+.pay-secure-note {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; color: var(--text-light); margin-bottom: 20px;
+}
+.pay-submit {
+  width: 100%; padding: 16px; border-radius: 14px;
+  background: var(--ocean); color: white; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 6px 24px rgba(44,125,160,0.4);
+}
+.pay-submit:hover { background: var(--ocean-deep); transform: translateY(-1px); }
+.pay-submit:active { transform: translateY(0); }
+.pay-submit.processing { opacity: 0.7; pointer-events: none; }
+.pay-guarantee {
+  text-align: center; font-size: 0.78rem; color: var(--text-light);
+  margin-top: 14px;
+}
+.pay-success {
+  text-align: center; padding: 40px 20px;
+  display: none;
+}
+.pay-success.show { display: block; }
+.pay-success-icon { font-size: 3.5rem; margin-bottom: 16px; }
+.pay-success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 10px;
+}
+.pay-success-sub { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+
+/* ─── CHAT WIDGET ────────────────────────────────────── */
+.chat-bubble {
+  position: fixed; bottom: 28px; right: 24px; z-index: 1500;
+}
+.chat-btn {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--ocean), var(--ocean-deep));
+  border: none; cursor: pointer; color: white; font-size: 1.6rem;
+  box-shadow: 0 8px 32px rgba(44,125,160,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+  position: relative;
+}
+.chat-btn:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(44,125,160,0.6); }
+.chat-notif {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--coral); color: white; font-size: 0.65rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid white;
+  animation: notifPulse 2s ease-in-out infinite;
+}
+@keyframes notifPulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.15)} }
+.chat-window {
+  position: absolute; bottom: 78px; right: 0;
+  width: 360px; background: white; border-radius: 22px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+  overflow: hidden;
+  transform: scale(0.85) translateY(20px);
+  transform-origin: bottom right;
+  opacity: 0; pointer-events: none;
+  transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+}
+.chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.chat-win-header {
+  background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+  padding: 16px 18px; color: white;
+  display: flex; align-items: center; gap: 12px;
+}
+.chat-agent-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0; position: relative;
+}
+.chat-online-dot {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #4cde80; border: 2px solid var(--ocean-deep);
+}
+.chat-agent-info { flex: 1; }
+.chat-agent-name { font-weight: 700; font-size: 0.95rem; }
+.chat-agent-status { font-size: 0.73rem; opacity: 0.8; }
+.chat-win-close {
+  background: none; border: none; color: white; font-size: 1.1rem;
+  cursor: pointer; opacity: 0.75; transition: opacity 0.2s;
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.chat-win-close:hover { opacity: 1; background: rgba(255,255,255,0.15); }
+.chat-tabs {
+  display: flex; border-bottom: 1px solid var(--border);
+  background: var(--sand);
+}
+.chat-tab {
+  flex: 1; padding: 10px 8px; border: none; background: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600;
+  color: var(--text-light); cursor: pointer; transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+.chat-tab.active { color: var(--ocean); border-bottom-color: var(--ocean); background: white; }
+.chat-pane { display: none; }
+.chat-pane.active { display: flex; flex-direction: column; }
+
+/* Chat messages pane */
+.chat-msgs {
+  height: 280px; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--sand);
+}
+.chat-msg { display: flex; flex-direction: column; max-width: 82%; }
+.chat-msg.agent { align-self: flex-start; }
+.chat-msg.user { align-self: flex-end; align-items: flex-end; }
+.chat-msg-bubble {
+  padding: 10px 13px; border-radius: 16px; font-size: 0.85rem; line-height: 1.5;
+}
+.chat-msg.agent .chat-msg-bubble {
+  background: white; color: var(--text);
+  border-bottom-left-radius: 4px; border: 1px solid var(--border);
+}
+.chat-msg.user .chat-msg-bubble {
+  background: var(--ocean); color: white;
+  border-bottom-right-radius: 4px;
+}
+.chat-msg-meta { font-size: 0.65rem; color: var(--text-light); margin-top: 3px; }
+.chat-typing {
+  display: flex; align-items: center; gap: 4px;
+  background: white; border: 1px solid var(--border);
+  padding: 10px 13px; border-radius: 16px; border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+.chat-typing span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--text-light);
+  animation: typingDot 1.2s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,80%,100%{transform:scale(0.7);opacity:0.4}40%{transform:scale(1);opacity:1} }
+.chat-input-row {
+  display: flex; gap: 8px; padding: 12px 14px;
+  background: white; border-top: 1px solid var(--border); align-items: flex-end;
+}
+.chat-textarea {
+  flex: 1; border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+  resize: none; outline: none; max-height: 90px; min-height: 38px;
+  transition: border 0.2s; background: var(--sand); color: var(--text);
+  line-height: 1.4;
+}
+.chat-textarea:focus { border-color: var(--ocean); background: white; }
+.chat-send-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--ocean); border: none; color: white; cursor: pointer;
+  font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.chat-send-btn:hover { background: var(--ocean-deep); }
+
+/* Feedback pane */
+.feedback-pane-body { padding: 16px; background: var(--sand); }
+.feedback-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.feedback-type-btn {
+  background: white; border: 2px solid var(--border); border-radius: 12px;
+  padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.feedback-type-btn:hover { border-color: var(--ocean); background: var(--ocean-pale); }
+.feedback-type-btn.selected { border-color: var(--ocean); background: var(--ocean-pale); }
+.feedback-type-icon { font-size: 1.4rem; margin-bottom: 4px; }
+.feedback-type-label { font-size: 0.75rem; font-weight: 600; color: var(--text-mid); }
+.feedback-stars { display: flex; gap: 6px; justify-content: center; margin: 12px 0; }
+.feedback-star {
+  font-size: 1.6rem; cursor: pointer; color: var(--border);
+  transition: color 0.15s; line-height: 1;
+}
+.feedback-star.active { color: var(--sun); }
+.feedback-textarea {
+  width: 100%; padding: 12px; border-radius: 12px;
+  border: 2px solid var(--border); font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; resize: none; height: 100px; outline: none;
+  transition: border 0.2s; background: white; margin-bottom: 12px;
+  color: var(--text);
+}
+.feedback-textarea:focus { border-color: var(--ocean); }
+.feedback-submit {
+  width: 100%; padding: 12px; border-radius: 12px;
+  background: var(--ocean); color: white; border: none;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: background 0.2s;
+}
+.feedback-submit:hover { background: var(--ocean-deep); }
+.feedback-success {
+  text-align: center; padding: 30px 20px; display: none;
+}
+.feedback-success.show { display: block; }
+
+/* IP watermark */
+.ip-notice {
+  position: fixed; bottom: 90px; right: 14px;
+  font-size: 0.58rem; color: rgba(0,0,0,0.18);
+  pointer-events: none; z-index: 9999;
+  writing-mode: vertical-lr;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  LANDING PAGE                                       -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="landing">
+
+<!-- Nav -->
+<nav class="land-nav">
+  <div class="land-logo">Life<span>Hub</span>™</div>
+  <div class="land-nav-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" class="nav-cta" onclick="showApp()">Log In</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Family-first app</div>
+      <h1 class="hero-title">
+        One app for<br>your whole<br>
+        <span class="accent">family</span> —<br>
+        <span class="accent2">made easy.</span>
+      </h1>
+      <p class="hero-sub">Schedules, bills, meals, and money. All in one place. Finally, a command center that keeps your family connected and your life organized.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showApp()">🌊 Get Started Free</button>
+        <a href="#features" class="btn-secondary">See How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">⭐ <strong>4.9★</strong> rating</div>
+        <div class="trust-item">👨‍👩‍👧 <strong>10,000+</strong> families</div>
+        <div class="trust-item">🔒 <strong>Bank-grade</strong> security</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card fc-left">
+        <div class="fc-label">Net Worth</div>
+        <div class="fc-value">$142,400</div>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-header-top">
+              <div class="phone-logo-sm">LifeHub™</div>
+              <div class="phone-greeting">Good morning, Alex!</div>
+            </div>
+            <div class="phone-stats">
+              <div class="phone-stat">
+                <div class="phone-stat-val">$142k</div>
+                <div class="phone-stat-label">Net Worth</div>
+              </div>
+              <div class="phone-stat">
+                <div class="phone-stat-val">3/7</div>
+                <div class="phone-stat-label">Tasks Done</div>
+              </div>
+              <div class="phone-stat">
+                <div class="phone-stat-val">4</div>
+                <div class="phone-stat-label">Events Today</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-tabs">
+            <div class="phone-tab active">Overview</div>
+            <div class="phone-tab">Calendar</div>
+            <div class="phone-tab">Finance</div>
+            <div class="phone-tab">Family</div>
+          </div>
+          <div class="phone-content">
+            <div class="phone-card">
+              <div class="phone-card-title">📋 Today's Tasks</div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--seafoam)"></div>✓ School pickup — 3pm <div class="phone-pill">Done</div></div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--sun)"></div>Pay electricity bill</div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--coral)"></div>Dentist — Jordan 4pm</div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-title">🍽️ Dinner Tonight</div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--ocean)"></div>Grilled Salmon + Veggies</div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--seafoam)"></div>Est. 520 cal/serving</div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-title">💰 Bills Due Soon</div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--coral)"></div>Car Insurance — $187 <div class="phone-pill" style="background:var(--coral-light);color:var(--coral)">Due Fri</div></div>
+              <div class="phone-item"><div class="phone-dot" style="background:var(--sun)"></div>Mortgage — $2,100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-card fc-right">
+        <div class="fc-label">Family Activity</div>
+        <div class="fc-value">Riley ✓ chores</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- Features -->
+<div class="features-bg" id="features">
+  <div class="section">
+    <div class="section-tag">Everything in one place</div>
+    <h2 class="section-title">Built for real family life</h2>
+    <p class="section-sub">Seven apps replaced by one. LifeHub™ is the only tool your family needs to stay organized, connected, and on budget.</p>
+    <div class="features-grid" id="feat-grid"></div>
+  </div>
+</div>
+
+<!-- Demo -->
+<div class="demo-section" id="demo">
+  <div class="section-tag">See it in action</div>
+  <h2 class="section-title">Everything you need, beautifully organized</h2>
+  <p class="section-sub">Watch how LifeHub™ brings your whole family together in one elegant dashboard.</p>
+  <div class="demo-window">
+    <div class="demo-toolbar">
+      <div class="demo-dot" style="background:#ff5f57"></div>
+      <div class="demo-dot" style="background:#febc2e"></div>
+      <div class="demo-dot" style="background:#28c840"></div>
+      <div class="demo-url">lifehub.app</div>
+    </div>
+    <div class="demo-screens" id="demo-screens"></div>
+    <div class="demo-dots" id="demo-dots"></div>
+  </div>
+  <p class="demo-note">📱 Works on any phone, tablet, or computer — no download required</p>
+</div>
+
+<!-- Social Proof -->
+<div style="background:white">
+  <div class="section">
+    <div class="section-tag">Loved by families</div>
+    <h2 class="section-title">What families are saying</h2>
+    <div class="reviews-grid" id="reviews-grid"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</div>
+
+<!-- Pricing -->
+<div class="pricing-bg" id="pricing">
+  <div class="section" style="text-align:center">
+    <div class="section-tag">Simple pricing</div>
+    <h2 class="section-title">Plans for every family</h2>
+    <p class="section-sub" style="margin:0 auto">Start free, upgrade when you're ready. No hidden fees, cancel anytime.</p>
+    <div class="pricing-toggle">
+      <span class="toggle-label">Monthly</span>
+      <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
+      <span class="toggle-label">Annual</span>
+      <span class="save-badge">Save 38%</span>
+    </div>
+    <div class="pricing-grid" id="pricing-grid"></div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div style="background:white" id="faq">
+  <div class="section" style="text-align:center">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Common questions</h2>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</div>
+
+<!-- Waitlist CTA -->
+<div class="cta-section">
+  <div class="section-tag">Join the waitlist</div>
+  <h2 class="section-title" style="margin-bottom:12px">Ready to simplify family life?</h2>
+  <p style="color:var(--text-mid);font-size:1rem">Join 10,000+ families already using LifeHub™. Get early access and 3 months free.</p>
+  <div class="waitlist-form">
+    <input type="email" id="waitlist-email" class="waitlist-input" placeholder="Enter your email">
+    <button class="btn-primary" onclick="joinWaitlist()">Join Waitlist →</button>
+  </div>
+  <p class="waitlist-note">🔒 No spam. Unsubscribe anytime. We respect your privacy.</p>
+  <div style="margin-top:32px">
+    <button class="btn-secondary" onclick="showApp()" style="margin:0 auto">
+      Already have an account? Log In
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="land-footer">
+  <strong>LifeHub™</strong> — Family Command Center<br>
+  © 2026 LifeHub™. Patent Pending. All Rights Reserved. Protected under 17 U.S.C. § 101.
+  <div class="land-footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact</a>
+    <a href="#">Security</a>
+  </div>
+</footer>
+
+</div><!-- /#landing -->
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  APP SHELL                                          -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="app-shell">
+
+  <!-- PIN Screen -->
+  <div id="pin-screen">
+    <div class="pin-box">
+      <div class="pin-logo">Life<span>Hub</span>™</div>
+      <p class="pin-sub">Select your profile and enter your PIN</p>
+      <select class="pin-select" id="member-select" onchange="resetPin()">
+        <option value="">Choose family member…</option>
+        <option value="Alex">Alex (Parent) — PIN: 1234</option>
+        <option value="Jordan">Jordan (Parent) — PIN: 2345</option>
+        <option value="Riley">Riley (Teen) — PIN: 3456</option>
+        <option value="Sam">Sam (Child) — PIN: 4567</option>
+      </select>
+      <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot-ui" id="pd0"></div>
+        <div class="pin-dot-ui" id="pd1"></div>
+        <div class="pin-dot-ui" id="pd2"></div>
+        <div class="pin-dot-ui" id="pd3"></div>
+      </div>
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="pinKey('1')">1</button>
+        <button class="pin-key" onclick="pinKey('2')">2</button>
+        <button class="pin-key" onclick="pinKey('3')">3</button>
+        <button class="pin-key" onclick="pinKey('4')">4</button>
+        <button class="pin-key" onclick="pinKey('5')">5</button>
+        <button class="pin-key" onclick="pinKey('6')">6</button>
+        <button class="pin-key" onclick="pinKey('7')">7</button>
+        <button class="pin-key" onclick="pinKey('8')">8</button>
+        <button class="pin-key" onclick="pinKey('9')">9</button>
+        <button class="pin-key clear" onclick="pinKey('clear')">✕ Clear</button>
+        <button class="pin-key" onclick="pinKey('0')">0</button>
+        <button class="pin-key" onclick="pinKey('back')">⌫</button>
+      </div>
+      <div class="pin-error" id="pin-error"></div>
+      <button class="btn-secondary" onclick="showLanding()" style="margin-top:18px;width:100%;justify-content:center">← Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="main-app">
+    <header class="app-header">
+      <div class="app-logo">Life<span class="sp">Hub</span>™</div>
+      <div class="app-header-right">
+        <div class="app-user">
+          <div class="app-avatar" id="user-avatar" style="background:var(--ocean)"></div>
+          <span id="user-name-display"></span>
+        </div>
+        <button class="btn-logout" onclick="logout()">Log Out</button>
+      </div>
+    </header>
+
+    <div class="app-content">
+      <!-- Overview Panel -->
+      <div class="panel active" id="panel-overview">
+        <div class="overview-grid">
+          <div class="ov-stat"><div class="ov-stat-num" style="color:var(--ocean-deep)">$142,400</div><div class="ov-stat-label">Net Worth</div></div>
+          <div class="ov-stat"><div class="ov-stat-num" id="tasks-pct" style="color:var(--seafoam)">43%</div><div class="ov-stat-label">Tasks Done Today</div></div>
+          <div class="ov-stat"><div class="ov-stat-num" style="color:var(--coral)">3</div><div class="ov-stat-label">Bills Due This Week</div></div>
+          <div class="ov-stat"><div class="ov-stat-num" style="color:var(--sun)">4</div><div class="ov-stat-label">Family Events Today</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌊 Good to see you! Here's today at a glance:</div>
+          <div id="overview-activity"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">💰 Bills Coming Up</div>
+          <div class="task-item"><div class="task-text">Car Insurance — $187</div><div class="chip chip-coral">Due Friday</div></div>
+          <div class="task-item"><div class="task-text">Mortgage — $2,100</div><div class="chip chip-sun">Due in 8 days</div></div>
+          <div class="task-item"><div class="task-text">Electric Bill — $145</div><div class="chip chip-blue">Due in 12 days</div></div>
+        </div>
+      </div>
+
+      <!-- Calendar Panel -->
+      <div class="panel" id="panel-calendar">
+        <div class="card">
+          <div class="cal-header">
+            <button class="cal-nav" onclick="calPrev()">‹</button>
+            <div class="cal-month" id="cal-month"></div>
+            <button class="cal-nav" onclick="calNext()">›</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📅 Upcoming Events</div>
+          <div class="task-item"><div class="task-text">Dentist — Jordan</div><div class="chip chip-blue">Today 4pm</div></div>
+          <div class="task-item"><div class="task-text">Soccer Practice — Riley</div><div class="chip chip-green">Thu 5pm</div></div>
+          <div class="task-item"><div class="task-text">Date Night 🌙</div><div class="chip chip-coral">Sat 7pm</div></div>
+          <div class="task-item"><div class="task-text">Car Insurance Due</div><div class="chip chip-sun">Fri</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">➕ Add Event</div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="event-name" placeholder="Event name">
+            <input type="date" class="app-input" id="event-date">
+            <button class="app-btn app-btn-primary" onclick="addEvent()">Add</button>
+          </div>
+          <div id="custom-events" style="margin-top:10px"></div>
+        </div>
+      </div>
+
+      <!-- Tasks Panel -->
+      <div class="panel" id="panel-tasks">
+        <div class="card">
+          <div class="card-title">📋 Daily Tasks
+            <span id="task-chip" class="chip chip-blue" style="margin-left:auto"></span>
+          </div>
+          <div class="progress-bar-wrap" style="margin-bottom:14px">
+            <div class="progress-bar-fill" id="task-progress"></div>
+          </div>
+          <div id="task-list"></div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="new-task" placeholder="Add a task…">
+            <button class="app-btn app-btn-primary" onclick="addTask()">Add</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🧹 Household Chores</div>
+          <div id="chore-list"></div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="new-chore" placeholder="Add a chore…">
+            <button class="app-btn app-btn-primary" onclick="addChore()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finance Panel -->
+      <div class="panel" id="panel-finance">
+        <div class="card">
+          <div class="card-title">🏦 Accounts</div>
+          <div class="account-row"><span class="account-name">Checking</span><span class="account-bal">$4,820.00</span></div>
+          <div class="account-row"><span class="account-name">Savings</span><span class="account-bal">$18,350.00</span></div>
+          <div class="account-row"><span class="account-name">Investments (Stocks)</span><span class="account-bal positive">$72,400.00</span></div>
+          <div class="account-row"><span class="account-name">Bonds</span><span class="account-bal">$14,200.00</span></div>
+          <div class="account-row"><span class="account-name">401(k)</span><span class="account-bal positive">$32,630.00</span></div>
+          <div class="account-row" style="border-top:2px solid var(--ocean-light);margin-top:6px;padding-top:12px">
+            <span style="font-weight:700">Total Net Worth</span>
+            <span class="account-bal" style="font-size:1.1rem;color:var(--ocean-deep)">$142,400.00</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🛒 Grocery Budget</div>
+          <div class="budget-row">
+            <div class="budget-label">Produce <span>$120 / $180</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:67%;background:linear-gradient(90deg,var(--seafoam),var(--ocean))"></div></div>
+          </div>
+          <div class="budget-row">
+            <div class="budget-label">Meat & Protein <span>$85 / $120</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:71%"></div></div>
+          </div>
+          <div class="budget-row">
+            <div class="budget-label">Pantry & Dry Goods <span>$55 / $100</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:55%"></div></div>
+          </div>
+          <div class="budget-row">
+            <div class="budget-label">Dairy & Eggs <span>$40 / $60</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:67%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meals Panel -->
+      <div class="panel" id="panel-meals">
+        <div class="card">
+          <div class="card-title">🍽️ Today's Meal Plan</div>
+          <div class="meal-row"><div class="meal-icon">🌅</div><div class="meal-info"><div class="meal-name">Avocado Toast + Eggs</div><div class="meal-cal">420 cal</div></div><div class="chip chip-blue">Breakfast</div></div>
+          <div class="meal-row"><div class="meal-icon">☀️</div><div class="meal-info"><div class="meal-name">Greek Salad + Grilled Chicken</div><div class="meal-cal">580 cal</div></div><div class="chip chip-sun">Lunch</div></div>
+          <div class="meal-row"><div class="meal-icon">🌙</div><div class="meal-info"><div class="meal-name">Salmon + Roasted Vegetables</div><div class="meal-cal">620 cal</div></div><div class="chip chip-coral">Dinner</div></div>
+          <div style="text-align:right;margin-top:10px;font-size:0.82rem;color:var(--text-light)">Total: <strong style="color:var(--text)">1,620 cal</strong></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🍕 Restaurant Suggestions</div>
+          <div class="meal-row"><div class="meal-icon">🌊</div><div class="meal-info"><div class="meal-name">The Catch — Seafood</div><div class="meal-cal">⭐ 4.8 · $$$ · 0.8mi</div></div></div>
+          <div class="meal-row"><div class="meal-icon">🌮</div><div class="meal-info"><div class="meal-name">Casa Familia — Mexican</div><div class="meal-cal">⭐ 4.6 · $$ · 1.2mi</div></div></div>
+          <div class="meal-row"><div class="meal-icon">🍝</div><div class="meal-info"><div class="meal-name">Trattoria Bella — Italian</div><div class="meal-cal">⭐ 4.7 · $$$ · 2.1mi</div></div></div>
+        </div>
+      </div>
+
+      <!-- Family Hub Panel -->
+      <div class="panel" id="panel-family">
+        <div class="card">
+          <div class="card-title">👨‍👩‍👧‍👦 Family Members</div>
+          <div id="member-list"></div>
+        </div>
+        <div class="card" id="perms-card" style="display:none">
+          <div class="card-title" id="perms-title">Permissions</div>
+          <div class="perm-grid" id="perm-grid"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 Family Messages</div>
+          <div class="msg-list" id="msg-list"></div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="msg-input" placeholder="Message the family…">
+            <button class="app-btn app-btn-primary" onclick="sendMsg()">Send</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📌 Shared Board</div>
+          <div id="board-list"></div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="board-input" placeholder="Pin a note, reminder, or request…">
+            <button class="app-btn app-btn-primary" onclick="pinNote()">Pin</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Assistant Panel -->
+      <div class="panel" id="panel-ai">
+        <div class="card">
+          <div class="card-title">🤖 LifeHub™ AI Assistant</div>
+          <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:14px">Powered by Claude. Ask anything about meals, budgeting, scheduling, chores, or family planning.</p>
+          <div class="ai-chat" id="ai-chat"></div>
+          <div class="input-row">
+            <input type="text" class="app-input" id="ai-input" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter')sendAI()">
+            <button class="app-btn app-btn-primary" onclick="sendAI()">Ask →</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💡 Quick Prompts</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px" id="quick-prompts"></div>
+        </div>
+      </div>
+    </div><!-- /.app-content -->
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" onclick="showPanel('overview',this)">
+        <div class="nav-tab-icon">🏠</div><div class="nav-tab-label">Home</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('calendar',this)">
+        <div class="nav-tab-icon">📅</div><div class="nav-tab-label">Calendar</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('tasks',this)">
+        <div class="nav-tab-icon">✅</div><div class="nav-tab-label">Tasks</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('finance',this)">
+        <div class="nav-tab-icon">💰</div><div class="nav-tab-label">Finance</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('meals',this)">
+        <div class="nav-tab-icon">🍽️</div><div class="nav-tab-label">Meals</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('family',this)">
+        <div class="nav-tab-icon">👨‍👩‍👧</div><div class="nav-tab-label">Family</div>
+      </button>
+      <button class="nav-tab" onclick="showPanel('ai',this)">
+        <div class="nav-tab-icon">🤖</div><div class="nav-tab-label">AI</div>
+      </button>
+    </nav>
+
+    <div class="ip-notice">© 2026 LifeHub™ Patent Pending</div>
+  </div><!-- /#main-app -->
+
+</div><!-- /#app-shell -->
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  PAYMENT MODAL                                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="pay-overlay" onclick="closePaymentModal(event)">
+  <div class="pay-modal" style="position:relative">
+    <button class="modal-close" onclick="closePaymentModal(null,true)">✕</button>
+
+    <div class="pay-header" id="pay-modal-header">
+      <div class="pay-header-top">
+        <div>
+          <div class="pay-plan-name" id="pm-plan-name">Family Plan</div>
+          <div class="pay-plan-desc" id="pm-plan-desc">Up to 6 family members · All features included</div>
+        </div>
+        <div class="pay-plan-price">
+          <div class="pay-price-num" id="pm-plan-price">$7.99</div>
+          <span class="pay-price-period" id="pm-plan-period">per month</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="pay-success" id="pay-success">
+      <div class="pay-success-icon">🎉</div>
+      <div class="pay-success-title">Welcome to LifeHub™!</div>
+      <div class="pay-success-sub">Your subscription is active. You're all set to start organizing your family life. Let's get started!</div>
+      <button class="pay-submit" style="max-width:260px;margin:0 auto;display:block" onclick="closePaymentModal(null,true);showApp()">🌊 Open LifeHub™ →</button>
+    </div>
+
+    <!-- Payment form -->
+    <div class="pay-body" id="pay-form-body">
+      <!-- Billing toggle -->
+      <div class="pay-section-label">Billing Frequency</div>
+      <div class="pay-toggle-row">
+        <button class="pay-toggle-btn active" id="ptog-monthly" onclick="setPayBilling('monthly')">Monthly</button>
+        <button class="pay-toggle-btn" id="ptog-annual" onclick="setPayBilling('annual')">Annual <span class="pay-save-tag">Save 38%</span></button>
+      </div>
+
+      <!-- Included features -->
+      <div class="pay-section-label">What's Included</div>
+      <ul class="pay-features-list" id="pm-features"></ul>
+
+      <!-- Personal Info -->
+      <div class="pay-section-label">Your Information</div>
+      <div class="form-row">
+        <div class="pay-field">
+          <div class="pay-label">First Name</div>
+          <input type="text" class="pay-input" id="pay-fname" placeholder="Alex">
+        </div>
+        <div class="pay-field">
+          <div class="pay-label">Last Name</div>
+          <input type="text" class="pay-input" id="pay-lname" placeholder="Johnson">
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="pay-field">
+          <div class="pay-label">Email Address</div>
+          <input type="email" class="pay-input" id="pay-email" placeholder="alex@family.com">
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="pay-section-label" style="margin-top:8px">Payment Details</div>
+      <div class="pay-card-icons">
+        <div class="card-icon">VISA</div>
+        <div class="card-icon">MC</div>
+        <div class="card-icon">AMEX</div>
+        <div class="card-icon">DISC</div>
+        <div class="card-icon" style="background:var(--ocean-pale);color:var(--ocean);border-color:var(--ocean-light)">STRIPE</div>
+      </div>
+      <div class="form-row full" style="margin-bottom:14px">
+        <div class="pay-field">
+          <div class="pay-label">Card Number</div>
+          <input type="text" class="pay-input" id="pay-card" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCard(this)">
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="pay-field">
+          <div class="pay-label">Name on Card</div>
+          <input type="text" class="pay-input" id="pay-card-name" placeholder="Alex Johnson">
+        </div>
+        <div class="pay-field">
+          <div class="pay-label">Expiry</div>
+          <input type="text" class="pay-input" id="pay-expiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+        </div>
+        <div class="pay-field">
+          <div class="pay-label">CVV</div>
+          <input type="text" class="pay-input" id="pay-cvv" placeholder="123" maxlength="4">
+        </div>
+      </div>
+
+      <div class="pay-secure-note">
+        🔒 <span>Your payment is encrypted with 256-bit SSL. We never store your card details. Powered by Stripe.</span>
+      </div>
+
+      <button class="pay-submit" id="pay-submit-btn" onclick="submitPayment()">
+        <span id="pay-btn-text">Complete Subscription →</span>
+      </button>
+      <div class="pay-guarantee">🛡️ 7-day money-back guarantee · Cancel anytime · No hidden fees</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  LIVE CHAT + FEEDBACK WIDGET                        -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="chat-bubble" id="chat-bubble">
+  <div class="chat-window" id="chat-window">
+    <div class="chat-win-header">
+      <div class="chat-agent-avatar">
+        🧑‍💼<div class="chat-online-dot"></div>
+      </div>
+      <div class="chat-agent-info">
+        <div class="chat-agent-name">LifeHub™ Support</div>
+        <div class="chat-agent-status">● Live agent available now</div>
+      </div>
+      <button class="chat-win-close" onclick="toggleChat()">✕</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="chat-tabs">
+      <button class="chat-tab active" id="tab-chat" onclick="switchChatTab('chat')">💬 Live Chat</button>
+      <button class="chat-tab" id="tab-feedback" onclick="switchChatTab('feedback')">💡 Suggestions</button>
+    </div>
+
+    <!-- CHAT PANE -->
+    <div class="chat-pane active" id="pane-chat">
+      <div class="chat-msgs" id="chat-msgs"></div>
+      <div class="chat-input-row">
+        <textarea class="chat-textarea" id="chat-input" placeholder="Type your message…" rows="1" onkeydown="chatKeydown(event)" oninput="autoResize(this)"></textarea>
+        <button class="chat-send-btn" onclick="sendChatMsg()">➤</button>
+      </div>
+    </div>
+
+    <!-- FEEDBACK/SUGGESTIONS PANE -->
+    <div class="chat-pane" id="pane-feedback">
+      <div class="feedback-pane-body">
+        <div id="feedback-form-inner">
+          <div style="font-size:0.8rem;color:var(--text-mid);margin-bottom:12px;line-height:1.5">
+            We read every suggestion. Your ideas shape LifeHub™. Share privately — only our team sees this.
+          </div>
+          <div class="pay-section-label">Type of Feedback</div>
+          <div class="feedback-type-grid">
+            <div class="feedback-type-btn" id="fb-feature" onclick="selectFeedbackType('feature')">
+              <div class="feedback-type-icon">✨</div>
+              <div class="feedback-type-label">Feature Request</div>
+            </div>
+            <div class="feedback-type-btn" id="fb-bug" onclick="selectFeedbackType('bug')">
+              <div class="feedback-type-icon">🐛</div>
+              <div class="feedback-type-label">Bug Report</div>
+            </div>
+            <div class="feedback-type-btn" id="fb-improve" onclick="selectFeedbackType('improve')">
+              <div class="feedback-type-icon">🔧</div>
+              <div class="feedback-type-label">Improvement</div>
+            </div>
+            <div class="feedback-type-btn" id="fb-other" onclick="selectFeedbackType('other')">
+              <div class="feedback-type-icon">💬</div>
+              <div class="feedback-type-label">General</div>
+            </div>
+          </div>
+          <div class="pay-section-label">Your Experience</div>
+          <div class="feedback-stars" id="fb-stars">
+            <div class="feedback-star" onclick="rateStar(1)">★</div>
+            <div class="feedback-star" onclick="rateStar(2)">★</div>
+            <div class="feedback-star" onclick="rateStar(3)">★</div>
+            <div class="feedback-star" onclick="rateStar(4)">★</div>
+            <div class="feedback-star" onclick="rateStar(5)">★</div>
+          </div>
+          <textarea class="feedback-textarea" id="fb-text" placeholder="Tell us your idea, what you'd change, or what you love…"></textarea>
+          <button class="feedback-submit" onclick="submitFeedback()">Send Privately to LifeHub™ Team →</button>
+        </div>
+        <div class="feedback-success" id="feedback-success">
+          <div style="font-size:2.5rem;margin-bottom:12px">🙏</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:8px">Thank you!</div>
+          <div style="font-size:0.85rem;color:var(--text-mid);line-height:1.6">Your feedback has been sent privately to the LifeHub™ team. We genuinely read and act on every suggestion.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="chat-btn" onclick="toggleChat()" id="chat-main-btn" title="Chat with us">
+    <span id="chat-btn-icon">💬</span>
+    <div class="chat-notif" id="chat-notif">1</div>
+  </button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+// ─── SECURITY ──────────────────────────────────────────────
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.key === 'F12' || (e.ctrlKey && ['u','s','i','j','c'].includes(e.key.toLowerCase()))) e.preventDefault();
+});
+document.addEventListener('copy', e => {
+  const sel = window.getSelection().toString();
+  if (sel) e.clipboardData.setData('text/plain', sel + '\n\n© 2026 LifeHub™ Patent Pending. All rights reserved.');
+  e.preventDefault();
+});
+console.log('%c⛔ STOP — LifeHub™ © 2026. Patent Pending. Unauthorized access is a violation of 17 U.S.C. § 101.', 'color:red;font-size:16px;font-weight:bold');
+
+// ─── SESSION TIMEOUT ───────────────────────────────────────
+let sessionTimer;
+function resetSession() {
+  clearTimeout(sessionTimer);
+  sessionTimer = setTimeout(logout, 30 * 60 * 1000);
+}
+['click','keydown','mousemove','touchstart'].forEach(e => document.addEventListener(e, resetSession));
+
+// ─── TOAST ─────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── LANDING / APP SWITCH ──────────────────────────────────
+function showApp() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('app-shell').style.display = 'block';
+}
+function showLanding() {
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('app-shell').style.display = 'none';
+  document.getElementById('main-app').style.display = 'none';
+  document.getElementById('pin-screen').style.display = 'flex';
+  resetPin();
+}
+function logout() {
+  currentUser = null; pinEntry = '';
+  document.getElementById('main-app').style.display = 'none';
+  document.getElementById('pin-screen').style.display = 'flex';
+  document.getElementById('member-select').value = '';
+  resetPin();
+  showToast('Logged out successfully.');
+}
+
+// ─── PIN LOGIN ─────────────────────────────────────────────
+const PINS = { Alex:'1234', Jordan:'2345', Riley:'3456', Sam:'4567' };
+const COLORS = { Alex:'#2c7da0', Jordan:'#e07a5f', Riley:'#84c7af', Sam:'#f4a261' };
+let pinEntry = '', currentUser = null;
+
+function resetPin() { pinEntry = ''; updatePinDots(); document.getElementById('pin-error').textContent = ''; }
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('pd' + i).classList.toggle('filled', i < pinEntry.length);
+  }
+}
+function pinKey(k) {
+  const sel = document.getElementById('member-select').value;
+  if (!sel) { showToast('Please select a family member first!'); return; }
+  if (k === 'clear') { pinEntry = ''; }
+  else if (k === 'back') { pinEntry = pinEntry.slice(0, -1); }
+  else if (pinEntry.length < 4) { pinEntry += k; }
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    if (pinEntry === PINS[sel]) {
+      currentUser = sel;
+      launchApp();
+    } else {
+      const box = document.querySelector('.pin-box');
+      box.classList.add('pin-shake');
+      setTimeout(() => box.classList.remove('pin-shake'), 400);
+      document.getElementById('pin-error').textContent = 'Incorrect PIN. Try again.';
+      setTimeout(resetPin, 800);
+    }
+  }
+}
+function launchApp() {
+  document.getElementById('pin-screen').style.display = 'none';
+  document.getElementById('main-app').style.display = 'flex';
+  document.getElementById('user-name-display').textContent = currentUser;
+  const av = document.getElementById('user-avatar');
+  av.textContent = currentUser[0];
+  av.style.background = COLORS[currentUser];
+  initApp();
+  resetSession();
+}
+
+// ─── APP INIT ──────────────────────────────────────────────
+let tasks = [
+  {text:'School pickup — 3pm', done:true, assign:'Alex'},
+  {text:'Pay electricity bill', done:false, assign:'Jordan'},
+  {text:'Dentist appointment — 4pm', done:false, assign:'Jordan'},
+  {text:'Grocery run', done:false, assign:'Alex'},
+  {text:'Review monthly budget', done:true, assign:'Jordan'},
+  {text:'Call insurance company', done:false, assign:'Alex'},
+  {text:'Plan weekend meals', done:true, assign:'Jordan'},
+];
+let chores = [
+  {text:'Vacuum living room', done:false, assign:'Riley'},
+  {text:'Unload dishwasher', done:true, assign:'Sam'},
+  {text:'Take out trash', done:false, assign:'Riley'},
+  {text:'Clean bathroom sink', done:false, assign:'Sam'},
+];
+let msgs = [
+  {from:'Jordan', text:'Don\'t forget dentist at 4!', me:false},
+  {from:'Riley', text:'Can I have a friend over Friday?', me:false},
+  {from:'Alex', text:'Looks good! I\'ll check the calendar.', me:true},
+];
+let board = [
+  {text:'Soccer practice Thursday 5pm — Riley', icon:'⚽'},
+  {text:'Buy more dish soap', icon:'🛒'},
+  {text:'Family movie night Saturday 🎬', icon:'📌'},
+];
+let calOffset = 0, customEvents = [];
+const members = [
+  {name:'Alex', role:'Parent', color:'#2c7da0', emoji:'👨'},
+  {name:'Jordan', role:'Parent', color:'#e07a5f', emoji:'👩'},
+  {name:'Riley', role:'Teen', color:'#84c7af', emoji:'🧒'},
+  {name:'Sam', role:'Child', color:'#f4a261', emoji:'🧒'},
+];
+let selectedMember = null;
+const perms = {};
+members.forEach(m => { perms[m.name] = {Finance:true, Calendar:true, Tasks:true, Messages:true, Board:true, Meals:true}; });
+
+function initApp() {
+  renderTasks(); renderChores(); renderCalendar(); renderFamily();
+  renderBoard(); renderMsgs(); renderOverview(); initAI();
+}
+
+// ─── PANEL NAVIGATION ──────────────────────────────────────
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── TASKS ─────────────────────────────────────────────────
+function renderTasks() {
+  const done = tasks.filter(t => t.done).length;
+  const pct = Math.round(done / tasks.length * 100);
+  document.getElementById('task-progress').style.width = pct + '%';
+  document.getElementById('task-chip').textContent = done + '/' + tasks.length + ' done';
+  document.getElementById('tasks-pct').textContent = pct + '%';
+  const list = document.getElementById('task-list');
+  list.innerHTML = tasks.map((t, i) => `
+    <div class="task-item">
+      <div class="task-cb ${t.done ? 'done' : ''}" onclick="toggleTask(${i})">${t.done ? '✓' : ''}</div>
+      <div class="task-text ${t.done ? 'done' : ''}">${t.text}</div>
+      <div class="task-assign">${t.assign}</div>
+    </div>`).join('');
+}
+function toggleTask(i) { tasks[i].done = !tasks[i].done; renderTasks(); renderOverview(); }
+function addTask() {
+  const v = document.getElementById('new-task').value.trim();
+  if (!v) return;
+  tasks.push({text:v, done:false, assign:currentUser});
+  document.getElementById('new-task').value = '';
+  renderTasks(); showToast('Task added! ✅');
+}
+
+// ─── CHORES ────────────────────────────────────────────────
+function renderChores() {
+  document.getElementById('chore-list').innerHTML = chores.map((c, i) => `
+    <div class="task-item">
+      <div class="task-cb ${c.done ? 'done' : ''}" onclick="toggleChore(${i})">${c.done ? '✓' : ''}</div>
+      <div class="task-text ${c.done ? 'done' : ''}">${c.text}</div>
+      <div class="task-assign">${c.assign}</div>
+    </div>`).join('');
+}
+function toggleChore(i) { chores[i].done = !chores[i].done; renderChores(); }
+function addChore() {
+  const v = document.getElementById('new-chore').value.trim();
+  if (!v) return;
+  chores.push({text:v, done:false, assign:currentUser});
+  document.getElementById('new-chore').value = '';
+  renderChores(); showToast('Chore added! 🧹');
+}
+
+// ─── CALENDAR ──────────────────────────────────────────────
+function renderCalendar() {
+  const now = new Date();
+  const d = new Date(now.getFullYear(), now.getMonth() + calOffset, 1);
+  document.getElementById('cal-month').textContent = d.toLocaleString('default', {month:'long', year:'numeric'});
+  const firstDay = d.getDay();
+  const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const today = now.getDate(), thisMonth = calOffset === 0;
+  const eventDays = [3, 7, 12, 18, 22, 28];
+  let html = days.map(d => `<div class="cal-day-label">${d}</div>`).join('');
+  for (let i = 0; i < firstDay; i++) html += '<div></div>';
+  for (let i = 1; i <= daysInMonth; i++) {
+    const isToday = thisMonth && i === today;
+    const hasEv = eventDays.includes(i) || customEvents.some(e => {
+      const ed = new Date(e.date);
+      return ed.getDate() === i && ed.getMonth() === d.getMonth() && ed.getFullYear() === d.getFullYear();
+    });
+    html += `<div class="cal-day ${isToday ? 'today' : ''} ${hasEv ? 'has-event' : ''}">${i}</div>`;
+  }
+  document.getElementById('cal-grid').innerHTML = html;
+}
+function calPrev() { calOffset--; renderCalendar(); }
+function calNext() { calOffset++; renderCalendar(); }
+function addEvent() {
+  const name = document.getElementById('event-name').value.trim();
+  const date = document.getElementById('event-date').value;
+  if (!name || !date) return;
+  customEvents.push({name, date});
+  document.getElementById('event-name').value = '';
+  document.getElementById('event-date').value = '';
+  renderCalendar();
+  const el = document.getElementById('custom-events');
+  el.innerHTML += `<div class="task-item"><div class="task-text">${name}</div><div class="chip chip-blue">${date}</div></div>`;
+  showToast('Event added to calendar! 📅');
+}
+
+// ─── FAMILY ────────────────────────────────────────────────
+function renderFamily() {
+  document.getElementById('member-list').innerHTML = members.map((m, i) => `
+    <div class="member-card ${selectedMember === i ? 'selected' : ''}" onclick="selectMember(${i})">
+      <div class="member-avatar-lg" style="background:${m.color}">${m.emoji}</div>
+      <div><div class="member-name">${m.name}</div><div class="member-role">${m.role}</div></div>
+    </div>`).join('');
+  if (selectedMember !== null) {
+    const m = members[selectedMember];
+    document.getElementById('perms-card').style.display = 'block';
+    document.getElementById('perms-title').textContent = m.name + '\'s Permissions';
+    document.getElementById('perm-grid').innerHTML = Object.keys(perms[m.name]).map(k => `
+      <div class="perm-toggle">
+        <span>${k}</span>
+        <button class="perm-switch ${perms[m.name][k] ? 'on' : 'off'}" onclick="togglePerm('${m.name}','${k}')"></button>
+      </div>`).join('');
+  }
+}
+function selectMember(i) { selectedMember = i; renderFamily(); }
+function togglePerm(name, key) {
+  perms[name][key] = !perms[name][key]; renderFamily();
+  showToast(`${name}'s access to ${key} updated!`);
+}
+
+// ─── MESSAGES ──────────────────────────────────────────────
+function renderMsgs() {
+  document.getElementById('msg-list').innerHTML = msgs.map(m => `
+    <div class="msg-bubble ${m.me ? 'me' : 'them'}">
+      <div class="msg-text">${m.text}</div>
+      <div class="msg-meta">${m.me ? 'You' : m.from}</div>
+    </div>`).join('');
+  const ml = document.getElementById('msg-list');
+  ml.scrollTop = ml.scrollHeight;
+}
+function sendMsg() {
+  const v = document.getElementById('msg-input').value.trim();
+  if (!v) return;
+  msgs.push({from:currentUser, text:v, me:true});
+  document.getElementById('msg-input').value = '';
+  renderMsgs();
+}
+
+// ─── BOARD ─────────────────────────────────────────────────
+function renderBoard() {
+  document.getElementById('board-list').innerHTML = board.map(b => `
+    <div class="task-item">
+      <span style="font-size:1.1rem">${b.icon}</span>
+      <div class="task-text">${b.text}</div>
+    </div>`).join('');
+}
+function pinNote() {
+  const v = document.getElementById('board-input').value.trim();
+  if (!v) return;
+  board.unshift({text:v, icon:'📌'});
+  document.getElementById('board-input').value = '';
+  renderBoard(); showToast('Pinned to family board! 📌');
+}
+
+// ─── OVERVIEW ──────────────────────────────────────────────
+function renderOverview() {
+  const done = tasks.filter(t => t.done).length;
+  const pct = Math.round(done / tasks.length * 100);
+  document.getElementById('tasks-pct').textContent = pct + '%';
+  document.getElementById('overview-activity').innerHTML = `
+    <div class="task-item"><div class="task-text">✅ ${done} of ${tasks.length} tasks done today</div></div>
+    <div class="task-item"><div class="task-text">📅 Dentist appointment — Jordan at 4pm</div><div class="chip chip-blue">Today</div></div>
+    <div class="task-item"><div class="task-text">🛒 Grocery budget: $300 of $460 spent</div></div>
+    <div class="task-item"><div class="task-text">🍽️ Dinner tonight: Salmon + Roasted Vegetables</div></div>
+    <div class="task-item"><div class="task-text">💬 ${msgs.length} family messages</div></div>`;
+}
+
+// ─── AI ASSISTANT ──────────────────────────────────────────
+const QUICK_PROMPTS = [
+  "Plan meals for this week",
+  "How can we save on groceries?",
+  "Suggest a fun family activity",
+  "Help me organize our schedule",
+  "Tips for chore assignments",
+  "How to stick to our budget?",
+];
+function initAI() {
+  document.getElementById('ai-chat').innerHTML = `
+    <div class="ai-msg ai">👋 Hi ${currentUser}! I'm your LifeHub™ AI assistant. I can help with meal planning, budgeting, scheduling, chores, and family organization. What would you like help with today?</div>`;
+  document.getElementById('quick-prompts').innerHTML = QUICK_PROMPTS.map(p => `
+    <button class="chip chip-blue" style="cursor:pointer;padding:8px 14px" onclick="askAI('${p}')">${p}</button>`).join('');
+}
+async function sendAI() {
+  const input = document.getElementById('ai-input');
+  const q = input.value.trim(); if (!q) return;
+  input.value = ''; askAI(q);
+}
+async function askAI(q) {
+  const chat = document.getElementById('ai-chat');
+  chat.innerHTML += `<div class="ai-msg user">${q}</div>`;
+  const thinking = document.createElement('div');
+  thinking.className = 'ai-msg ai';
+  thinking.innerHTML = '<div class="ai-thinking"><span></span><span></span><span></span></div>';
+  chat.appendChild(thinking); chat.scrollTop = chat.scrollHeight;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`You are the LifeHub™ AI assistant — a friendly, warm family life helper. The current user is ${currentUser}. Their family uses LifeHub to manage schedules, finances, meals, tasks, and chores. Keep responses helpful, concise, and friendly. Use occasional emojis. Focus on practical family advice.`,
+        messages:[{role:'user', content:q}]
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "I couldn't get a response. Please try again!";
+    thinking.remove();
+    chat.innerHTML += `<div class="ai-msg ai">${reply}</div>`;
+  } catch(e) {
+    thinking.remove();
+    chat.innerHTML += `<div class="ai-msg ai">Sorry, I'm having trouble connecting right now. Please try again in a moment! 🌊</div>`;
+  }
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// ─── LANDING PAGE DATA ──────────────────────────────────────
+const TICKER_ITEMS = [
+  {icon:'📅', text:'Family Calendar'},
+  {icon:'💰', text:'Finance Dashboard'},
+  {icon:'🍽️', text:'Meal Planning'},
+  {icon:'✅', text:'Tasks & Chores'},
+  {icon:'💬', text:'Family Messaging'},
+  {icon:'🛒', text:'Grocery Budget'},
+  {icon:'🤖', text:'AI Assistant'},
+  {icon:'💊', text:'Health Reminders'},
+  {icon:'🚗', text:'Car Insurance'},
+  {icon:'🏠', text:'Mortgage Tracking'},
+  {icon:'📌', text:'Shared Board'},
+  {icon:'🔐', text:'Secure PIN Login'},
+];
+(function buildTicker() {
+  const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  document.getElementById('ticker').innerHTML = items.map(i =>
+    `<div class="ticker-item" data-icon="${i.icon}">${i.text}</div>`).join('');
+})();
+
+const FEATURES = [
+  {icon:'📅', title:'Unified Family Calendar', desc:'Color-coded events for every family member. Bills, appointments, work shifts, school events — all in one view.'},
+  {icon:'💰', title:'Finance Dashboard', desc:'Track checking, savings, investments, and 401(k) accounts. See your real-time net worth and monthly spending trends.'},
+  {icon:'🍽️', title:'Smart Meal Planning', desc:'AI-powered meal suggestions with calorie tracking and automatic grocery list generation. Dinner is handled.'},
+  {icon:'✅', title:'Tasks & Chores', desc:'Assign daily tasks and household chores to family members. Track completion with progress bars and celebration moments.'},
+  {icon:'👨‍👩‍👧', title:'Family Sharing System', desc:'Per-member permissions for every section. Parents control what teens and kids can see. Private and shared spaces.'},
+  {icon:'🤖', title:'AI Family Assistant', desc:'Powered by Claude. Get instant help with meal plans, budget advice, scheduling conflicts, and family coordination.'},
+];
+(function buildFeatures() {
+  document.getElementById('feat-grid').innerHTML = FEATURES.map(f => `
+    <div class="feat-card">
+      <div class="feat-icon">${f.icon}</div>
+      <div class="feat-title">${f.title}</div>
+      <div class="feat-desc">${f.desc}</div>
+    </div>`).join('');
+})();
+
+const DEMO_SLIDES = [
+  {title:'📊 Family Overview', cards:[
+    {label:'Net Worth', value:'$142,400', sub:'↑ 3.2% this month'},
+    {label:'Tasks Today', value:'3 of 7 done', sub:'43% complete'},
+    {label:'Bills Due', value:'$432 this week', sub:'Car ins + electric'},
+    {label:'Family Events', value:'4 today', sub:'Dentist, practice…'},
+  ]},
+  {title:'📅 Family Calendar', cards:[
+    {label:'Today', value:'Dentist 4pm', sub:'Jordan'},
+    {label:'Thursday', value:'Soccer Practice', sub:'Riley — 5pm'},
+    {label:'Saturday', value:'Date Night 🌙', sub:'Alex + Jordan'},
+    {label:'Next Week', value:'Mortgage Due', sub:'$2,100'},
+  ]},
+  {title:'💰 Finance Hub', cards:[
+    {label:'Checking', value:'$4,820', sub:'Chase Bank'},
+    {label:'Savings', value:'$18,350', sub:'High-yield'},
+    {label:'Investments', value:'$72,400', sub:'↑ 12.4% YTD'},
+    {label:'Grocery Budget', value:'$300/$460', sub:'65% used'},
+  ]},
+  {title:'🍽️ Meal Planning', cards:[
+    {label:'Breakfast', value:'Avocado Toast', sub:'420 cal'},
+    {label:'Lunch', value:'Greek Salad', sub:'580 cal'},
+    {label:'Dinner', value:'Salmon + Veggies', sub:'620 cal'},
+    {label:'Total Calories', value:'1,620 cal', sub:'On track ✓'},
+  ]},
+];
+let demoIdx = 0, demoTimer;
+function buildDemo() {
+  const screens = document.getElementById('demo-screens');
+  const dots = document.getElementById('demo-dots');
+  screens.innerHTML = DEMO_SLIDES.map((s, i) => `
+    <div class="demo-screen ${i===0?'active':''}" id="ds${i}">
+      <div class="demo-screen-header">${s.title}</div>
+      <div class="demo-cards">${s.cards.map(c => `
+        <div class="demo-card">
+          <div class="demo-card-label">${c.label}</div>
+          <div class="demo-card-value">${c.value}</div>
+          <div class="demo-card-sub">${c.sub}</div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+  dots.innerHTML = DEMO_SLIDES.map((_, i) =>
+    `<div class="demo-dot-nav ${i===0?'active':''}" onclick="goDemo(${i})"></div>`).join('');
+  demoTimer = setInterval(() => goDemo((demoIdx + 1) % DEMO_SLIDES.length), 3500);
+}
+function goDemo(i) {
+  document.querySelectorAll('.demo-screen').forEach((s,j) => s.classList.toggle('active', j===i));
+  document.querySelectorAll('.demo-dot-nav').forEach((d,j) => d.classList.toggle('active', j===i));
+  demoIdx = i;
+}
+buildDemo();
+
+const REVIEWS = [
+  {stars:'★★★★★', text:'LifeHub replaced five apps for our family. The finance dashboard alone is worth it — finally seeing everything in one place. The AI assistant is genuinely helpful!', name:'Sarah M.', role:'Mom of 3, Texas', color:'#2c7da0'},
+  {stars:'★★★★★', text:'The chore assignment feature stopped a LOT of arguments in our house. Kids can see their tasks, we can see everything. Game changer for family organization.', name:'David K.', role:'Dad of 2, California', color:'#84c7af'},
+  {stars:'★★★★★', text:'I was skeptical at first but this is incredible. Meal planning, grocery budget, work schedule — all synced. I save 2+ hours of planning every week.', name:'Michelle T.', role:'Working mom, New York', color:'#e07a5f'},
+];
+document.getElementById('reviews-grid').innerHTML = REVIEWS.map(r => `
+  <div class="review-card">
+    <div class="stars">${r.stars}</div>
+    <p class="review-text">"${r.text}"</p>
+    <div class="review-author">
+      <div class="review-avatar" style="background:${r.color}">${r.name[0]}</div>
+      <div><div class="review-name">${r.name}</div><div class="review-role">${r.role}</div></div>
+    </div>
+  </div>`).join('');
+
+document.getElementById('stats-row').innerHTML = [
+  {num:'10,000+', label:'Families using LifeHub'},
+  {num:'4.9★', label:'Average rating'},
+  {num:'7', label:'Apps replaced on average'},
+  {num:'2hrs', label:'Saved per week per family'},
+].map(s => `<div class="stat-item"><span class="stat-num">${s.num}</span><div class="stat-label">${s.label}</div></div>`).join('');
+
+// Pricing
+let isAnnual = false;
+const PLANS = [
+  {name:'Starter', tagline:'One person, essential tools', mo:3.99, yr:2.49, features:['1 user only','Tasks & calendar (view only)','Basic reminders','Meal suggestions (3/week)','No family sharing','No finance dashboard','Email support'], btn:'btn-outline', cta:'Get Starter'},
+  {name:'Family', tagline:'Most popular', mo:7.99, yr:4.99, featured:true, badge:'Most Popular', features:['Up to 6 family members','Full finance dashboard','AI assistant (unlimited)','Grocery budget tracker','Family messaging & board','Work schedule tracking','Priority support'], btn:'btn-primary', cta:'Start Family Plan'},
+  {name:'Premium', tagline:'Everything, unlimited', mo:14.99, yr:9.99, features:['Unlimited family members','All Family features','Advanced AI insights','Custom integrations','Early access to new features','White-glove onboarding','24/7 phone support'], btn:'btn-outline', cta:'Start Premium'},
+  {name:'Enterprise', tagline:'For large households & teams', mo:29.99, yr:19.99, features:['Unlimited members & admins','Everything in Premium','Dedicated account manager','API access & integrations','Custom branding options','SSO & advanced security','SLA guarantee + phone support'], btn:'btn-outline', cta:'Contact Us'},
+];
+function toggleBilling() {
+  isAnnual = !isAnnual;
+  document.getElementById('billing-toggle').classList.toggle('annual', isAnnual);
+  renderPricing();
+}
+function renderPricing() {
+  document.getElementById('pricing-grid').innerHTML = PLANS.map(p => `
+    <div class="plan-card ${p.featured ? 'featured' : ''}">
+      ${p.badge ? `<div class="plan-badge">${p.badge}</div>` : ''}
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-tagline">${p.tagline}</div>
+      <div class="plan-price">$${(isAnnual ? p.yr : p.mo).toFixed(2)}<span>/mo</span></div>
+      <div class="plan-period">${isAnnual ? 'Billed annually' : 'Billed monthly'}</div>
+      <ul class="plan-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+      <button class="plan-btn plan-${p.btn}" onclick="selectPlan('${p.name}')">${p.cta}</button>
+    </div>`).join('');
+}
+function selectPlan(name) { openPaymentModal(name); }
+renderPricing();
+
+// FAQ
+const FAQS = [
+  {q:'Is my financial data safe?', a:'Yes. LifeHub uses bank-grade 256-bit encryption and never stores your actual bank credentials. Data is encrypted at rest and in transit. We take security extremely seriously.'},
+  {q:'How does the family sharing work?', a:'Each family member gets their own profile with a PIN. Parents set permission levels for each section — kids can see chores and meals, but not the finance dashboard, for example.'},
+  {q:'Can I try it before committing?', a:'Yes! Start with our Starter plan at $3.99/month — no long-term commitment. You can upgrade to Family or Premium at any time, and we offer a 7-day money-back guarantee on all plans.'},
+  {q:'Does it work on my phone?', a:'Yes! LifeHub works on any device with a browser — iPhone, Android, tablet, or computer. A native app is coming soon. No download needed right now.'},
+  {q:'Can I import from Google Calendar?', a:'Calendar import from Google, Apple, and Outlook is coming in our next major update. For now, you can add events manually with our quick-add feature.'},
+  {q:'What makes LifeHub different from Cozi or OurHome?', a:'LifeHub combines family coordination with real financial tracking, AI assistance, work scheduling, and meal planning — all in one place. Competitor apps only handle one or two of these.'},
+];
+document.getElementById('faq-list').innerHTML = FAQS.map((f, i) => `
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(${i})">
+      ${f.q} <span class="faq-arrow">+</span>
+    </button>
+    <div class="faq-a" id="faq-${i}">${f.a}</div>
+  </div>`).join('');
+function toggleFaq(i) {
+  const btn = document.querySelectorAll('.faq-q')[i];
+  const ans = document.getElementById('faq-' + i);
+  btn.classList.toggle('open'); ans.classList.toggle('open');
+  btn.querySelector('.faq-arrow').textContent = btn.classList.contains('open') ? '×' : '+';
+}
+
+// ─── PAYMENT MODAL ─────────────────────────────────────
+const PLAN_DATA = {
+  Starter:   { desc:'1 user · Essential tools only', mo:3.99,  yr:2.49,  features:['1 user account','Tasks & calendar (view only)','Basic reminders','Meal suggestions (3/week)','Email support'] },
+  Family:    { desc:'Up to 6 family members · All features', mo:7.99, yr:4.99, features:['Up to 6 family members','Full finance dashboard','Unlimited AI assistant','Grocery budget tracker','Family messaging & board','Work schedule tracking','Priority support'] },
+  Premium:   { desc:'Unlimited members · Everything included', mo:14.99, yr:9.99, features:['Unlimited family members','All Family features','Advanced AI insights','Custom integrations','Early access to new features','White-glove onboarding','24/7 phone support'] },
+  Enterprise:{ desc:'Large households & teams', mo:29.99, yr:19.99, features:['Unlimited members & admins','Everything in Premium','Dedicated account manager','API access & integrations','Custom branding options','SSO & advanced security','SLA guarantee + phone support'] },
+};
+let currentPayPlan = 'Family', payBilling = 'monthly';
+
+function openPaymentModal(planName) {
+  currentPayPlan = planName;
+  payBilling = 'monthly';
+  document.getElementById('ptog-monthly').classList.add('active');
+  document.getElementById('ptog-annual').classList.remove('active');
+  updatePayModal();
+  document.getElementById('pay-success').style.display = 'none';
+  document.getElementById('pay-success').classList.remove('show');
+  document.getElementById('pay-form-body').style.display = 'block';
+  document.getElementById('pay-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePaymentModal(e, force) {
+  if (e && e.target !== document.getElementById('pay-overlay') && !force) return;
+  document.getElementById('pay-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function updatePayModal() {
+  const plan = PLAN_DATA[currentPayPlan];
+  const price = payBilling === 'annual' ? plan.yr : plan.mo;
+  const period = payBilling === 'annual' ? 'per month, billed annually' : 'per month';
+  document.getElementById('pm-plan-name').textContent = currentPayPlan + ' Plan';
+  document.getElementById('pm-plan-desc').textContent = plan.desc;
+  document.getElementById('pm-plan-price').textContent = '$' + price.toFixed(2);
+  document.getElementById('pm-plan-period').textContent = period;
+  document.getElementById('pm-features').innerHTML = plan.features.map(f => `<li>${f}</li>`).join('');
+  document.getElementById('pay-btn-text').textContent = `Subscribe to ${currentPayPlan} — $${price.toFixed(2)}/${payBilling === 'annual' ? 'mo' : 'mo'} →`;
+}
+function setPayBilling(type) {
+  payBilling = type;
+  document.getElementById('ptog-monthly').classList.toggle('active', type === 'monthly');
+  document.getElementById('ptog-annual').classList.toggle('active', type === 'annual');
+  updatePayModal();
+}
+function formatCard(el) {
+  let v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function formatExpiry(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+  el.value = v;
+}
+function submitPayment() {
+  const fname = document.getElementById('pay-fname').value.trim();
+  const email = document.getElementById('pay-email').value.trim();
+  const card = document.getElementById('pay-card').value.replace(/\s/g,'');
+  const expiry = document.getElementById('pay-expiry').value;
+  const cvv = document.getElementById('pay-cvv').value;
+  if (!fname) { showToast('Please enter your name! 👤'); return; }
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email! 📧'); return; }
+  if (card.length < 16) { showToast('Please enter your full card number! 💳'); return; }
+  if (expiry.length < 5) { showToast('Please enter your card expiry! 📅'); return; }
+  if (cvv.length < 3) { showToast('Please enter your CVV! 🔒'); return; }
+  const btn = document.getElementById('pay-submit-btn');
+  btn.classList.add('processing');
+  document.getElementById('pay-btn-text').textContent = '🌊 Processing…';
+  setTimeout(() => {
+    document.getElementById('pay-form-body').style.display = 'none';
+    const s = document.getElementById('pay-success');
+    s.style.display = 'block'; s.classList.add('show');
+    btn.classList.remove('processing');
+    document.getElementById('pay-btn-text').textContent = `Subscribe to ${currentPayPlan} →`;
+  }, 2000);
+}
+
+// ─── CHAT WIDGET ────────────────────────────────────────
+let chatOpen = false, chatTabActive = 'chat', chatInitialized = false;
+let feedbackType = null, starRating = 0;
+
+const AGENT_MSGS = [
+  { text: "Hi there! 👋 Welcome to LifeHub™. I'm here to help — whether you have questions about plans, features, or anything else. What can I do for you today?", delay: 0 },
+];
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-window').classList.toggle('open', chatOpen);
+  document.getElementById('chat-btn-icon').textContent = chatOpen ? '✕' : '💬';
+  document.getElementById('chat-notif').style.display = chatOpen ? 'none' : 'flex';
+  if (chatOpen && !chatInitialized) { chatInitialized = true; initChat(); }
+}
+function switchChatTab(tab) {
+  chatTabActive = tab;
+  document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.chat-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('pane-' + tab).classList.add('active');
+}
+function initChat() {
+  const msgs = document.getElementById('chat-msgs');
+  msgs.innerHTML = '';
+  appendTyping();
+  setTimeout(() => {
+    removeTyping();
+    appendAgentMsg(AGENT_MSGS[0].text);
+  }, 900);
+}
+function appendAgentMsg(text) {
+  const msgs = document.getElementById('chat-msgs');
+  const div = document.createElement('div');
+  div.className = 'chat-msg agent';
+  div.innerHTML = `<div class="chat-msg-bubble">${text}</div><div class="chat-msg-meta">Support Agent · just now</div>`;
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+}
+function appendTyping() {
+  const msgs = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = 'chat-msg agent'; d.id = 'typing-indicator';
+  d.innerHTML = `<div class="chat-typing"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+async function sendChatMsg() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim(); if (!text) return;
+  input.value = ''; autoResize(input);
+  const msgs = document.getElementById('chat-msgs');
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-msg user';
+  userDiv.innerHTML = `<div class="chat-msg-bubble">${text}</div><div class="chat-msg-meta">You · just now</div>`;
+  msgs.appendChild(userDiv); msgs.scrollTop = msgs.scrollHeight;
+  appendTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514', max_tokens:1000,
+        system:`You are a warm, helpful live support agent for LifeHub™ — a family management web app. Be friendly, concise, and genuinely helpful. Answer questions about features, pricing, plans (Starter $3.99/mo, Family $7.99/mo, Premium $14.99/mo, Enterprise $29.99/mo), and general app usage. Keep responses short — 2-4 sentences max unless a detailed answer is truly needed. Use occasional friendly emojis. Sign off warmly. If asked about billing issues, assure them you can help and ask for their email.`,
+        messages:[{role:'user', content:text}]
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "Thanks for reaching out! Let me look into that for you. 🌊";
+    removeTyping(); appendAgentMsg(reply);
+  } catch(e) {
+    removeTyping();
+    appendAgentMsg("Sorry, I'm having a brief connection issue! Please try again in a moment, or email us at hello@lifehub.app 🌊");
+  }
+}
+function chatKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMsg(); }
+}
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 90) + 'px';
+}
+function selectFeedbackType(type) {
+  feedbackType = type;
+  ['feature','bug','improve','other'].forEach(t => {
+    document.getElementById('fb-' + t).classList.toggle('selected', t === type);
+  });
+}
+function rateStar(n) {
+  starRating = n;
+  document.querySelectorAll('.feedback-star').forEach((s,i) => {
+    s.classList.toggle('active', i < n);
+  });
+}
+function submitFeedback() {
+  const text = document.getElementById('fb-text').value.trim();
+  if (!feedbackType) { showToast('Please select a feedback type! 💡'); return; }
+  if (!text) { showToast('Please share your thoughts first! 💬'); return; }
+  document.getElementById('feedback-form-inner').style.display = 'none';
+  document.getElementById('feedback-success').classList.add('show');
+  feedbackType = null; starRating = 0;
+}
+function joinWaitlist() {
+  const email = document.getElementById('waitlist-email').value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email! 📧'); return; }
+  showToast('🌊 You\'re on the list! We\'ll be in touch soon.');
+  document.getElementById('waitlist-email').value = '';
+}
+</script>
+</body>
+</html>
